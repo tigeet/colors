@@ -17,7 +17,8 @@
       "@components/*": ["components/*"],
       "@static/*": ["static/*"],
       "@pages/*": ["pages/*"],
-      "@utils/*": ["utils/*"]
+      "@utils/*": ["utils/*"],
+      "@hocs/*": ["hocs/*"]
     }
   },
   "include": ["src", "declaration.d.ts"],
