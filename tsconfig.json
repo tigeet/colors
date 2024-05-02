@@ -21,7 +21,7 @@
       "@hocs/*": ["hocs/*"]
     }
   },
-  "include": ["src", "declaration.d.ts"],
+  "include": ["src", "declaration.d.ts"]
   // "exclude": ["node_modules", "build"],
-  "extends": "./paths.json"
+  // "extends": "./paths.json"
 }

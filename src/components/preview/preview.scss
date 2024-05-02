@@ -1,4 +1,16 @@
 .preview {
   aspect-ratio: 1/1;
   border-radius: 4px;
+
+  &_size_16 {
+    width: 16px;
+  }
+
+  &_size_32 {
+    width: 32px;
+  }
+
+  &_size_64 {
+    width: 64px;
+  }
 }

@@ -9,5 +9,17 @@ export default meta;
 type Story = StoryObj<typeof Preview>;
 
 export const Default: Story = {
-  render: () => <Preview hex="#36494E" />,
+  argTypes: {
+    hex: {
+      control: "text",
+    },
+    size: {
+      control: { type: "select" },
+    },
+  },
+  args: {
+    size: 32,
+    hex: "#36494E",
+  },
+  render: (args) => <Preview {...args} />,
 };

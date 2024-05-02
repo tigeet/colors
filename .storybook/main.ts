@@ -1,6 +1,7 @@
 import type { StorybookConfig } from "@storybook/react-webpack5";
 import path from "path";
 import TsconfigPathsPlugin from "tsconfig-paths-webpack-plugin";
+import custom from "../webpack.config.js";
 
 const config: StorybookConfig = {
   stories: ["../src/**/*.mdx", "../src/**/*.stories.@(js|jsx|mjs|ts|tsx)"],
@@ -22,33 +23,47 @@ const config: StorybookConfig = {
     autodocs: "tag",
   },
   webpackFinal: async (config, { configType }) => {
-    config!.rule;
-    config!.resolve!.plugins = [
+    // config!.resolve!.plugins = [
+    //   new TsconfigPathsPlugin({
+    //     configFile: path.resolve(__dirname, "../tsconfig.json"),
+    //   }),
+    // ];
+
+    // config.module?.rules?.push({
+    //   test: /\.s[ac]ss$/i,
+    //   use: ["style-loader", "css-loader", "sass-loader"],
+    // });
+    // config.module?.rules?.push({
+    //   test: /\.css$/i,
+    //   use: [
+    //     "style-loader",
+    //     "css-loader",
+    //     {
+    //       loader: "postcss-loader",
+    //       options: {
+    //         postcssOptions: {
+    //           plugins: ["postcss-nesting"],
+    //         },
+    //       },
+    //     },
+    //   ],
+    // });
+    // return config;
+    const merge = {
+      ...config,
+      module: {
+        ...config.module,
+        rules: [...config!.module!.rules!, ...custom.module.rules],
+      },
+    };
+
+    merge!.resolve!.plugins = [
       new TsconfigPathsPlugin({
         configFile: path.resolve(__dirname, "../tsconfig.json"),
       }),
     ];
 
-    config.module?.rules?.push({
-      test: /\.s[ac]ss$/i,
-      use: ["style-loader", "css-loader", "sass-loader"],
-    });
-    config.module?.rules?.push({
-      test: /\.css$/i,
-      use: [
-        "style-loader",
-        "css-loader",
-        {
-          loader: "postcss-loader",
-          options: {
-            postcssOptions: {
-              plugins: ["postcss-nesting"],
-            },
-          },
-        },
-      ],
-    });
-    return config;
+    return merge;
   },
 };
 export default config;
